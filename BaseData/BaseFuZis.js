@@ -1,10 +1,17 @@
-var ConstsMj = require('./../ConstsMj');
+/***
+ * 附子数据基类
+ * 所谓的附子：碰、吃、杠的牌 */
 
-/***附子数据基类 */
+var ConstsMj = require('./../ConstsMj');
+var BaseCards = require('./BaseCards');
+var util = require('util');
 var BaseFuZis = function(){
+    BaseCards.call(); 
     //this.fuZis = [ {fuzi_type:fuzi_type,cards:cards},{fuzi_type:fuzi_type,cards:cards} ];
     this.fuZis = [];
 }; 
+
+util.inherits(BaseFuZis, BaseCards);
 
 var pro = BaseFuZis.prototype;
 
@@ -12,7 +19,8 @@ var pro = BaseFuZis.prototype;
  * fuzi_type:附子类型(ConstsMj.FUZI_TYPE)
  * cards:附子牌( [1,1,1] ) size必须大于三等于4
  */
-pro.addFuZi = function( fuzi_type , cards ){ 
+pro.add = function( fuzi_type , cards ){ 
+    
     if( null == cards ){
         console.error( '请传入有效的附子牌' );
         return;
@@ -41,11 +49,4 @@ pro.getFuZis = function(){
 /***获取附子数量 */
 pro.getFuZiCnt = function(){
     _.size(this.fuZis);
-};
-
-/***断线重连重新解析附子数据
- * serverInfo:服务器的数据
- */
-pro.resetNet = function( serverInfo ){
-    this.fuZis = serverInfo;
 };

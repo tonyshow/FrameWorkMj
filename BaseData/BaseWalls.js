@@ -1,21 +1,28 @@
  /**************
  * 手牌已出的牌基类 
  * */
-var DataBase = require('./DataBase');
+
+var BaseCards = require('./BaseCards');
 var util = require('util'); 
-var BaseWalls = function( serverInfo , serverSeatInfo){
+var BaseWalls = function( ){
 
-    DataBase.call(this,serverSeatInfo); 
+    BaseCards.call(); 
 
-    this.mData = -1;
+    this.mCards = -1;
 }; 
 
-util.inherits(BaseWalls, DataBase);
+util.inherits(BaseWalls, BaseCards);
 
 var pro = BaseWalls.prototype;
  
 /***获取墙牌数量 */
 pro.getCnt = function(){
-    return this.mData;
+    return this.mCards;
 }; 
+
+/***移除最后一个数据 */
+pro.removeFrist = function( jData ){
+    
+};
+
 module.exports = BaseWalls;

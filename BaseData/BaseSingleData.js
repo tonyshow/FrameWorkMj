@@ -10,4 +10,11 @@ var BaseSingleData = function( serverData ){
 
 var pro = BaseSingleData.prototype;
 
+/***
+ * 初始化
+ */
+pro.init = function(){
+    //由子类自己实现
+};
+
 module.exports = BaseSingleData;

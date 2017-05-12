@@ -1,22 +1,23 @@
 /**************
  * 手牌数据基类 
  * */
-var DataBase = require('./DataBase');
+var BaseCards = require('./BaseCards');
 var util = require('util');
-var BaseHands = function(serverInfo , serverSeatInfo){
-    DataBase.call(this,serverSeatInfo);   
+
+var BaseHands = function(){
+    BaseCards.call();   
     this.cantHand = [];
     this.newGetCard = -1; 
 };
 
-util.inherits(BaseHands, DataBase);
+util.inherits(BaseHands, BaseCards);
 
 var pro = BaseHands.prototype; 
 
 /*** 初始化数据 */
 pro.init = function( _data ){
     //子类自己实现
-    this.mData = _data;
+    this.mCards = _data;
 };
 
 /***新增抓一张牌会调用
@@ -24,7 +25,7 @@ pro.init = function( _data ){
  */
 pro.add = function( jData ){
     var id = jData;
-    this.mData.push( id );
+    this.mCards.push( id );
 };
 
 /***打一张牌会调用
@@ -32,7 +33,7 @@ pro.add = function( jData ){
  */
 pro.remove = function( jData ){
     var idx = jData;
-    this.mData.splice(pos,1);
+    this.mCards.splice(pos,1);
 };
 
 /***设置为不可出
@@ -47,13 +48,6 @@ pro.setCantOutHands = function( _cantHands ){
  */
 pro.getCantOutHands = function(){
     return this.cantHand;
-};
-
-/***新抓到的牌
- *  return id  为-1表示没有新牌
- */
-pro.getNewGetHands = function(){
-    return this.newGetCard;
 };
 
 module.exports = BaseHands;

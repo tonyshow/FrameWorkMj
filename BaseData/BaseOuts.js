@@ -1,16 +1,16 @@
  /**************
  * 手牌已出的牌基类 
  * */
-var DataBase = require('./DataBase');
+var BaseCards = require('./BaseCards');
 var util = require('util'); 
-var BaseOuts = function( serverInfo , serverSeatInfo){
+var BaseOuts = function( ){
 
-    DataBase.call(this,serverSeatInfo);
+    BaseCards.call();
 
-    this.mData = [];
+    this.mCards = [];
 }; 
 
-util.inherits(BaseOuts, DataBase);
+util.inherits(BaseOuts, BaseCards);
 
 var pro = BaseOuts.prototype;
 
@@ -20,7 +20,7 @@ var pro = BaseOuts.prototype;
  */
 pro.add = function( jData ){ 
     var id = jData;
-    this.mData.push(id); 
+    this.mCards.push(id); 
 };
 
 /***移除数据最后打的牌
@@ -28,7 +28,7 @@ pro.add = function( jData ){
  */
 pro.removeLast = function(){ 
     //移除最后一位   
-    this.mData = _.initial( this.mData );
+    this.mCards = _.initial( this.mCards );
 };
 
 module.exports = BaseOuts;
